@@ -1,0 +1,10 @@
+---
+
+- name: 'PREREQUISITES | prepare to install firewalld'
+  import_tasks: prereq.yml
+
+- name: 'FIREWALLD | install and configurate firewalld'
+  import_tasks: install.yml
+
+- name: 'CONFIG | allow the rules'
+  import_tasks: config.yml

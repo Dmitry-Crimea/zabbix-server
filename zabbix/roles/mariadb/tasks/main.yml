@@ -1,0 +1,11 @@
+---
+
+- name: 'MARIADB | install and configurate mariadb'
+  import_tasks: install.yml
+
+- name: 'CONFIG | configure mariadb'
+  import_tasks: config.yml
+
+- name: 'USER | create user for mariadb'
+  import_tasks: user.yml
+

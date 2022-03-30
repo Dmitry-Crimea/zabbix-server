@@ -1,0 +1,19 @@
+---
+
+- name: Create DB user for Zabbix
+  block:
+    - name: Removes anonymous user account for localhost
+      mysql_user:
+        name: ''
+        host: all
+        state: absent
+
+
+- name: Ensure MySQL users {{ mysql_users.name }} are present
+  mysql_user:
+    name: "{{ item.name }}"
+    host: "{{ item.host | default('localhost') }}"
+    password: "{{ item.password }}"
+    priv: "{{ item.priv | default('*.*:ALL,GRANT') }}"
+    state: "{{ item.state | default(present) }}"
+  loop: "{{ mysql_users }}"

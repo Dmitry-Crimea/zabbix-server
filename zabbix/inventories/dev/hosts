@@ -1,0 +1,2 @@
+[all]
+zabbiz ansible_host=192.168.42.221 ansible_port=22

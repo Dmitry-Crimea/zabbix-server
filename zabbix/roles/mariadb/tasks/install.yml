@@ -1,0 +1,17 @@
+---
+
+- name: install and start mariadb-server
+  block:
+    - name: install mariadb-server
+      yum:
+        name: mariadb mariadb-server
+        state: present
+        update_cache: yes
+
+    - name: start mariadb-server
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+
+

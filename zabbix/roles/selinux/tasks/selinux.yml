@@ -1,0 +1,7 @@
+---
+
+- name: disable selinux
+  shell: setenforce 0
+
+- name: disable permanent
+  shell: sed -i "s/SELINUX=enforcing/SELINUX=disabled/" /etc/selinux/config

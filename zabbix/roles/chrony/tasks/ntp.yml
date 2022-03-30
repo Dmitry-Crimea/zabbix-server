@@ -1,0 +1,18 @@
+---
+
+- name: configure time zone
+  shell: \cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+
+- name: install chrony
+  yum:
+    name: chrony
+    state: present
+    update_cache: yes
+
+- name: start chrony
+  service:
+    name: chronyd
+    state: started
+    enabled: yes
+
+

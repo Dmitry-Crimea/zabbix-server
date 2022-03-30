@@ -1,0 +1,4 @@
+---
+
+- name: 'CHRONY | install and configure chronyd'
+  import_tasks: ntp.yml

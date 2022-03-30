@@ -1,0 +1,74 @@
+---
+##################################################
+# Firewall variables
+firewall:
+  ports:
+    - 2049/tcp
+    - 80/tcp
+    - 111/tcp
+    - 2048/tcp
+    - 8080/tcp
+    - 8443/tcp
+    - 17088/tcp
+    - 17089/tcp
+    - 17090/tcp
+    - 17091/tcp
+    - 17092/tcp
+    - 9000/tcp
+
+  services:
+    - http
+    - https
+    - dhcp
+    - dns
+
+  rules:
+    - rule protocol value="ospf" accept
+    - rule protocol value="icmp" accept
+
+##################################################
+# mariadb variables
+
+# Databases.
+mysql_databases:
+   - name: zabbix
+     collation: utf8_general_ci
+     encoding: utf8
+     replicate: 1
+     state: present
+
+# Users.
+mysql_users:
+   - name: zabbix
+     host: 127.0.0.1
+     password: zabbixpassword
+     priv: '*.*:ALL,GRANT'
+     state: present
+
+##################################################
+# mariadb variables
+
+nginx:
+  root_dir: /usr/share/nginx/html
+  conf_dir: /etc/nginx
+
+##################################################
+# mariadb variables
+
+php_fpm:
+  packages:
+    - php
+    - php-cli
+    - php-fpm
+    - php-json
+    - php-pdo
+    - php-mysqlnd
+    - php-zip
+    - php-gd
+    - php-mbstring
+    - php-curl
+    - php-xml
+    - php-pear
+    - php-bcmath
+    - MySQL-python
+
