@@ -1,19 +1,37 @@
 ---
 
-- name: install zabbix-server
-  block:
-    - name: add repo zabbix server
-      yum:
-        name: "{{ item.download_dir }}/{{ item.release }}"
-        state: "{{ item.state }}"
-        update_cache: yes
-      loop: "{{ zabbix }}"
+- name: install zabbix
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - zabbix-server-mysql
+    - zabbix-agent
 
-    - name: install zabbix-server
-      yum:
-        name: "{{ item }}"
-        state: present
-        update_cache: yes
-      loop: "{{ zabbix_packages }}"
+- name: cope repo conf
+  template:
+    src: zabbix.repo.j2
+    dest: /etc/yum.repos.d/zabbix.repo
+    owner: root
+    group: root
 
+- name: install zabbix
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - centos-release-scl
+    - zabbix-web-mysql-scl
+    - zabbix-nginx-conf-scl
+    - rh-php72
+    - rh-php72-php-bcmath
+    - rh-php72-php-fpm
+    - rh-php72-php-gd
+    - rh-php72-php-ldap
+    - rh-php72-php-mbstring
+    - rh-php72-php-xml
 
+- name: add base
+  shell: zcat /usr/share/doc/zabbix-server-mysql-5.0.21/create.sql.gz | mysql -u zabbix -p zabbix

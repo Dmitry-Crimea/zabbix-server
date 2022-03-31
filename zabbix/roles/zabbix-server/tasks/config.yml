@@ -3,7 +3,7 @@
 - name: copying conf file
   template:
     src: zabbix_server.conf.j2
-    dest: "{{ item.conf_path }}"
+    dest: "{{ item.conf_path }}zabbix_server.conf"
   loop: "{{ zabbix }}"
 
 - name: start zabbix-server

@@ -1,15 +1,7 @@
 ---
 
-- name: make dirrectory fo zabbix-server
-  file:
-    path: "{{ item.download_dir }}"
-    owner: root
-    group: root
-    mode: "{{ item.mode }}"
-  loop: "{{ zabbix }}"
+#- name: make dirrectory fo zabbix-server
+#  shell: rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm
 
-- name: download zabbix-server
-  get_url:
-    url: "{{ item.url }}"
-    dest: "{{ item.download_dir }}"
-  loop: "{{ zabbix }}"
+- name: clen repo
+  shell: yum clean all

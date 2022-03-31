@@ -4,9 +4,10 @@
   block:
     - name: install mariadb-server
       yum:
-        name: mariadb mariadb-server
+        name: "{{ item }}"
         state: present
         update_cache: yes
+      loop: "{{ mariadb_packages }}"
 
     - name: start mariadb-server
       service:
