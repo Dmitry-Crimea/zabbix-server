@@ -1,0 +1,14 @@
+---
+
+- name: copying conf file
+  template:
+    src: zabbix_server.conf.j2
+    dest: "{{ item.conf_path }}"
+  loop: "{{ zabbix }}"
+
+- name: start zabbix-server
+  service:
+    name: zabbix-server
+    state: started
+    enabled: yes
+

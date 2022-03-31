@@ -1,8 +1,8 @@
 ---
 
-- name: install nginx
+- name: ' INSTALL | install nginx'
   import_tasks: install.yml
 
 
-- name: config nginx
+- name: ' CONFIGURATE | config nginx'
   import_tasks: config.yml

@@ -1,0 +1,19 @@
+---
+
+- name: install zabbix-server
+  block:
+    - name: add repo zabbix server
+      yum:
+        name: "{{ item.download_dir }}/{{ item.release }}"
+        state: "{{ item.state }}"
+        update_cache: yes
+      loop: "{{ zabbix }}"
+
+    - name: install zabbix-server
+      yum:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop: "{{ zabbix_packages }}"
+
+
