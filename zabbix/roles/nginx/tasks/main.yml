@@ -3,6 +3,5 @@
 - name: ' INSTALL | install nginx'
   import_tasks: install.yml
 
-
 - name: ' CONFIGURATE | config nginx'
   import_tasks: config.yml
