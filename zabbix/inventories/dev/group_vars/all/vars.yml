@@ -5,28 +5,46 @@
 
 zabbix:
   - name: zabbix-server
-    url: http://repo.zabbix.com/zabbix/5.0/rhel/5/x86_64/zabbix-release-5.0-1.el5.noarch.rpm
-    download_dir: /home/it/zabbix_download
+#    url: https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm
+#    download_dir: /home/it/zabbix_download
+    zabbix_nginx: /etc/opt/rh/rh-nginx116/nginx/conf.d
+    zabbiix_php-fpm72: /etc/opt/rh/rh-php72/php-fpm.d
+    zabbix_repos: /etc/yum.repos.d
     user: zabbix
     group: zabbix
     state: present
     mode: '0644'
-    release: zabbix-release-5.0-1.el5.noarch.rpm
-    conf_path: /etc/zabbix/
-    gpgcheck: 0
-    description:  Zabbix Official Repository - $basearch
+#    release: zabbix-release-5.0-1.el5.noarch.rpm
+#    conf_path: /etc/zabbix/
+#    gpgcheck: 0
+#    description:  Zabbix Official Repository - $basearch
 
 zabbix_packages:
   - zabbix-server-mysql
-  - zabbix-web-mysql
-  - zabbix-agent
-  - zabbix-get
+  - zabbix-agent2
+  - centos-release-scl
+
+zabbix_centos_packages:
+  - epel-release
+  - yum-utils
+  - rh-php72-php-fpm
+  - zabbix-web-mysql-scl
+  - zabbix-nginx-conf-scl
+
+zabbix_services:
+  - zabbix-server
+  - rh-nginx116-nginx
+  - rh-php72-php-fpm
+  - zabbix-agent2
+
 
 ##################################################
 # Firewall variables
 
 firewall:
   ports:
+    - 888/tcp
+    - 10051/tcp
     - 2049/tcp
     - 80/tcp
     - 111/tcp
@@ -54,6 +72,7 @@ firewall:
 # mariadb variables
 
 mariadb_packages:
+  - MySQL-python
   - mariadb
   - mariadb-server
 
@@ -70,7 +89,7 @@ mysql_databases:
 mysql_users:
    - name: zabbix
      host: 127.0.0.1
-     password: zabbixpassword
+     password: zabbix
      priv: '*.*:ALL,GRANT'
      state: present
 

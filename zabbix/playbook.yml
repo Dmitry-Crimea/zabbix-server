@@ -3,10 +3,9 @@
 - hosts: all
   gather_facts: False
   roles:
-#    - chrony
-#    - firewalld
-#    - selinux
+    - chrony
+    - firewalld
+    - selinux
 #    - php-fpm
 #    - mariadb
-#    - nginx
-    - zabbix-server
+#    - zabbix-server
